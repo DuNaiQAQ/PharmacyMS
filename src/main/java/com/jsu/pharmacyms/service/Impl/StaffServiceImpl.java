@@ -53,16 +53,6 @@ public class StaffServiceImpl implements StaffService {
     }
 
     /**
-     * <p>添加员工职称连接</p>
-     * @param s_id 员工ID
-     * @param t_id 职称ID
-     * */
-    @Override
-    public void addConnection(int s_id,int t_id) {
-        staffDao.addConnection(t_id,s_id);
-    }
-
-    /**
      * <p>删除员工信息</p>
      * @param id 员工ID
      * */

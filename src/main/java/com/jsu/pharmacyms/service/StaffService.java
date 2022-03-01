@@ -10,7 +10,6 @@ public interface StaffService {
     void addStaff(Staff staff);
     List<StaffType> getTypeList();
     List<Staff> getStaffList();
-    void addConnection(int s_id,int t_id);
     void deleteStaff(int id);
     void deleteType(int id);
     StaffType getTypeInfo(int id);

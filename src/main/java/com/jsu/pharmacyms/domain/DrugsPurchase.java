@@ -1,6 +1,6 @@
 package com.jsu.pharmacyms.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * <p>药品进货信息</p>
@@ -8,7 +8,7 @@ import java.util.Date;
  * */
 public class DrugsPurchase {
     private int id;//进货单ID
-    private String name;//药品名称
+    private int drug_id;//药品名称
     private String batch_id;//批次号
     private int product_fac_id;//制造商ID
     private Date produce_time;//制造时间
@@ -16,21 +16,30 @@ public class DrugsPurchase {
     private int purchase_num;//进货数
     private double purchase_value;//进价
     private double purchase_value_sum;//总价格
+    private Date purchase_date;//进货时间
 
     public int getId() {
         return id;
+    }
+
+    public Date getPurchase_date() {
+        return purchase_date;
+    }
+
+    public void setPurchase_date(Date purchase_date) {
+        this.purchase_date = purchase_date;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getDrug_id() {
+        return drug_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDrug_id(int drug_id) {
+        this.drug_id = drug_id;
     }
 
     public String getBatch_id() {
