@@ -13,4 +13,7 @@ public interface StaffService {
     void deleteStaff(int id);
     void deleteType(int id);
     StaffType getTypeInfo(int id);
+    void updateStaff(Staff staff);
+    void addStaffType(StaffType type);
+    void updateStaffType(StaffType type);
 }

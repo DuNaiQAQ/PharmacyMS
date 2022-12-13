@@ -1,6 +1,6 @@
 package com.jsu.pharmacyms.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * <p>药品进货信息</p>
@@ -9,25 +9,53 @@ import java.sql.Date;
 public class DrugsPurchase {
     private int id;//进货单ID
     private int drug_id;//药品名称
+    private String drug_name;
     private String batch_id;//批次号
     private int product_fac_id;//制造商ID
-    private Date produce_time;//制造时间
-    private Date validity;//有效期
+    private String product_fac_name;
+    private Timestamp produce_time;//制造时间
+    private Timestamp validity;//有效期
     private int purchase_num;//进货数
     private double purchase_value;//进价
     private double purchase_value_sum;//总价格
-    private Date purchase_date;//进货时间
+    private Timestamp purchase_time;//进货时间
+    private int value;
+    private int v_date;
+
+    public int getV_date() {
+        return v_date;
+    }
+
+    public void setV_date(int v_date) {
+        this.v_date = v_date;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String getDrug_name() {
+        return drug_name;
+    }
+
+    public void setDrug_name(String drug_name) {
+        this.drug_name = drug_name;
+    }
+
+    public String getProduct_fac_name() {
+        return product_fac_name;
+    }
+
+    public void setProduct_fac_name(String product_fac_name) {
+        this.product_fac_name = product_fac_name;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public Date getPurchase_date() {
-        return purchase_date;
-    }
-
-    public void setPurchase_date(Date purchase_date) {
-        this.purchase_date = purchase_date;
     }
 
     public void setId(int id) {
@@ -58,21 +86,6 @@ public class DrugsPurchase {
         this.product_fac_id = product_fac_id;
     }
 
-    public Date getProduce_time() {
-        return produce_time;
-    }
-
-    public void setProduce_time(Date produce_time) {
-        this.produce_time = produce_time;
-    }
-
-    public Date getValidity() {
-        return validity;
-    }
-
-    public void setValidity(Date validity) {
-        this.validity = validity;
-    }
 
     public int getPurchase_num() {
         return purchase_num;
@@ -96,5 +109,29 @@ public class DrugsPurchase {
 
     public void setPurchase_value_sum(double purchase_value_sum) {
         this.purchase_value_sum = purchase_value_sum;
+    }
+
+    public Timestamp getProduce_time() {
+        return produce_time;
+    }
+
+    public void setProduce_time(Timestamp produce_time) {
+        this.produce_time = produce_time;
+    }
+
+    public Timestamp getValidity() {
+        return validity;
+    }
+
+    public void setValidity(Timestamp validity) {
+        this.validity = validity;
+    }
+
+    public Timestamp getPurchase_time() {
+        return purchase_time;
+    }
+
+    public void setPurchase_time(Timestamp purchase_time) {
+        this.purchase_time = purchase_time;
     }
 }

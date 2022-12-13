@@ -11,9 +11,9 @@ public interface FactoryDao {
             "values(#{id},#{name},#{about},#{logo},#{contact_number},#{contact_name})")
     void addFactoryinfo(Factory info);
 
-    @Update("update drug_produce_fac" +
+    @Update("update drug_produce_fac " +
             "set name=#{name},about=#{about},logo=#{logo},contact_number=#{contact_number},contact_name=#{contact_name}" +
-            "where id = #{id}")
+            " where id = #{id}")
     void updateFactoryInfo(Factory info);
 
     @Select("select * from drug_produce_fac")

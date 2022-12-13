@@ -7,6 +7,7 @@ import com.jsu.pharmacyms.service.StoreHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -52,5 +53,10 @@ public class StoreHouseServiceImpl implements StoreHouseService {
     @Override
     public List<DrugsPurchase> getPurchase() {
         return storeHouseDao.getPurchaseInfos();
+    }
+
+    @Override
+    public int getDiffTime(Timestamp start, Timestamp end) {
+        return storeHouseDao.getDiff(start,end);
     }
 }

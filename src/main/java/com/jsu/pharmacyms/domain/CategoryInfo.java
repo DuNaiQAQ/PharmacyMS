@@ -4,6 +4,15 @@ public class CategoryInfo {
     private int id;//分类ID
     private String name;//分类名称
     private int parent_id;//父分类名称
+    private String parent_name;//父类别名称
+
+    public String getParent_name() {
+        return parent_name;
+    }
+
+    public void setParent_name(String parent_name) {
+        this.parent_name = parent_name;
+    }
 
     public int getId() {
         return id;

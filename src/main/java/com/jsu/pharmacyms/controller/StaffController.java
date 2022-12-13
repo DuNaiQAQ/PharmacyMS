@@ -2,20 +2,19 @@ package com.jsu.pharmacyms.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jsu.pharmacyms.domain.DataList;
-import com.jsu.pharmacyms.domain.ResultInfo;
-import com.jsu.pharmacyms.domain.Staff;
-import com.jsu.pharmacyms.domain.StaffType;
+import com.jsu.pharmacyms.domain.*;
 import com.jsu.pharmacyms.service.StaffService;
 import com.jsu.pharmacyms.service.UserService;
+import com.jsu.pharmacyms.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Timestamp;
 
 @Controller
 @RequestMapping("/staff")
+@CrossOrigin
 public class StaffController {
 
     @Autowired
@@ -24,6 +23,8 @@ public class StaffController {
     @Autowired
     protected UserService userService;
 
+    @Autowired
+    protected RedisUtil redisUtil;
     /**
      * <p>增加员工，并且同时创造其对应的账号信息</p>
      * @param staff 上传的员工信息
@@ -31,7 +32,7 @@ public class StaffController {
      * */
     @RequestMapping(value = "/addStaff",method = RequestMethod.POST)
     @ResponseBody
-    public String addStaff(Staff staff) throws JsonProcessingException {
+    public String addStaff(@RequestBody Staff staff) throws JsonProcessingException {
         ResultInfo info=new ResultInfo();
         ObjectMapper mapper=new ObjectMapper();
         Staff t=staffService.getStaff(staff.getId());
@@ -44,6 +45,7 @@ public class StaffController {
             info.setMessage("添加失败:已有相同编号的员工");
             info.setCode(201);
         }
+        User user= (User) redisUtil.get("login_admin");
         return mapper.writeValueAsString(info);
     }
 
@@ -60,7 +62,6 @@ public class StaffController {
             DataList dataList=new DataList();
             dataList.setItems(staffService.getTypeList());
             dataList.setItemNums(dataList.getItems().size());
-
             info.setRes(dataList);
             info.setCode(200);
             info.setMessage("获取数据成功");
@@ -69,6 +70,7 @@ public class StaffController {
             info.setCode(500);
             info.setMessage("获取数据失败");
         }
+        User user= (User) redisUtil.get("login_admin");
         return mapper.writeValueAsString(info);
     }
 
@@ -103,7 +105,7 @@ public class StaffController {
      * */
     @RequestMapping(value = "/deletestaff")
     @ResponseBody
-    public String deleteStaff(int id) throws JsonProcessingException{
+    public String deleteStaff(@RequestBody int id) throws JsonProcessingException{
         ResultInfo info=new ResultInfo();
         ObjectMapper mapper=new ObjectMapper();
         try{
@@ -121,6 +123,7 @@ public class StaffController {
             info.setMessage("服务器内容错误");
             info.setCode(500);
         }
+        User user= (User) redisUtil.get("login_admin");
         return mapper.writeValueAsString(info);
     }
 
@@ -131,7 +134,7 @@ public class StaffController {
      * */
     @RequestMapping(value = "/deleteType")
     @ResponseBody
-    public String deleteType(int id) throws JsonProcessingException{
+    public String deleteType(@RequestBody int id) throws JsonProcessingException{
         ResultInfo info=new ResultInfo();
         ObjectMapper mapper=new ObjectMapper();
         try{
@@ -149,6 +152,61 @@ public class StaffController {
             info.setMessage("服务器内容错误");
             info.setCode(500);
         }
+        User user= (User) redisUtil.get("login_admin");
         return mapper.writeValueAsString(info);
+    }
+
+    @RequestMapping(value = "/addType")
+    @ResponseBody
+    public String addType(@RequestBody StaffType type) throws JsonProcessingException{
+        ResultInfo info=new ResultInfo();
+        ObjectMapper mapper=new ObjectMapper();
+        try{
+                staffService.addStaffType(type);
+                info.setCode(200);
+                info.setMessage("添加成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            info.setMessage("服务器内容错误");
+            info.setCode(500);
+        }
+        User user= (User) redisUtil.get("login_admin");
+        return mapper.writeValueAsString(info);
+    }
+
+    @RequestMapping(value = "/updateType")
+    @ResponseBody
+    public String updateType(@RequestBody StaffType type) throws JsonProcessingException{
+        ResultInfo info=new ResultInfo();
+        ObjectMapper mapper=new ObjectMapper();
+        try{
+            staffService.updateStaffType(type);
+            info.setCode(200);
+            info.setMessage("更新数据成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            info.setMessage("服务器内容错误");
+            info.setCode(500);
+        }
+        User user= (User) redisUtil.get("login_admin");
+        return mapper.writeValueAsString(info);
+    }
+
+    @RequestMapping("/changeInfo")
+    @ResponseBody
+    public String changeInfo(@RequestBody Staff info)throws JsonProcessingException{
+        ResultInfo resultInfo=new ResultInfo();
+        ObjectMapper mapper=new ObjectMapper();
+        try{
+            staffService.updateStaff(info);
+            resultInfo.setCode(200);
+            resultInfo.setMessage("修改信息成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            resultInfo.setMessage("服务器内容错误");
+            resultInfo.setCode(500);
+        }
+        User user= (User) redisUtil.get("login_admin");
+        return mapper.writeValueAsString(resultInfo);
     }
 }

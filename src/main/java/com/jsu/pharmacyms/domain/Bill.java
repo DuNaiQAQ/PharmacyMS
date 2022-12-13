@@ -3,11 +3,11 @@ package com.jsu.pharmacyms.domain;
 import java.sql.Timestamp;
 
 public class Bill {
-    private int id;
-    private String bill_info;
-    private double value;
-    private Timestamp bill_time;
-    private int bill_type;
+    private int id;//账单ID
+    private String bill_info;//账单信息
+    private double value;//账单金额
+    private Timestamp bill_time;//账单时间
+    private int bill_type;//账单类型 1:入库 2:售出
 
     public int getId() {
         return id;
@@ -39,5 +39,13 @@ public class Bill {
 
     public void setBill_time(Timestamp bill_time) {
         this.bill_time = bill_time;
+    }
+
+    public int getBill_type() {
+        return bill_type;
+    }
+
+    public void setBill_type(int bill_type) {
+        this.bill_type = bill_type;
     }
 }

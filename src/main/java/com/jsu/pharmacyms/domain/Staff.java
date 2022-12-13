@@ -1,6 +1,7 @@
 package com.jsu.pharmacyms.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 员工类
@@ -8,11 +9,12 @@ import java.sql.Date;
 public class Staff {
     private int id;//员工ID
     private String name;//员工姓名
-    private Date birthday;//员工出生年月日
+    private Timestamp birthday;//员工出生年月日
     private String phone;//员工手机号
     private String address;//员工住址
     private String photo;//员工照片
     private int type;//员工类型ID
+    private String type_name;//员工姓名
     private int user_id;//员工账号ID
     private String sex;//员工性别
 
@@ -32,11 +34,11 @@ public class Staff {
         this.name = name;
     }
 
-    public Date getBirthday() {
+    public Timestamp getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Timestamp birthday) {
         this.birthday = birthday;
     }
 
@@ -86,5 +88,13 @@ public class Staff {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getType_name() {
+        return type_name;
+    }
+
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
     }
 }

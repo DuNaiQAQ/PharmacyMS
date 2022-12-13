@@ -4,6 +4,7 @@ public class DrugInfo {
     private int id;//药品ID
     private String name;//药品名称
     private int category_id;//分类ID
+    private String category_name;//分类ID
     private int stock_num;//库存数量
     private double value;//单价
     private String position;//位置
@@ -81,5 +82,13 @@ public class DrugInfo {
 
     public void setTips(String tips) {
         this.tips = tips;
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 }

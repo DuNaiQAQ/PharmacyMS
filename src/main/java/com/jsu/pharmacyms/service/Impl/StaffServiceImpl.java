@@ -80,5 +80,20 @@ public class StaffServiceImpl implements StaffService {
         return staffDao.getTypeInfo(id);
     }
 
+    @Override
+    public void updateStaff(Staff staff) {
+        staffDao.updateStaff(staff);
+    }
+
+    @Override
+    public void addStaffType(StaffType type) {
+        staffDao.addTypeInfo(type);
+    }
+
+    @Override
+    public void updateStaffType(StaffType type) {
+        staffDao.updateTypeInfo(type);
+    }
+
 
 }

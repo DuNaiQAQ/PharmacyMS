@@ -7,7 +7,7 @@ public class User {
     private int id;//用户ID
     private String username;//用户名
     private String password;//用户密码
-    private int type;//用户类型 1:管理员 2:买家
+    private int type;//用户类型 1:管理员 2:买
 
     public int getId() {
         return id;

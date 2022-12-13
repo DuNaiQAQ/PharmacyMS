@@ -1,21 +1,26 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/pharmacyms?serverTimezone=GMT&allowMultiQueries=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://rm-bp1d3a0c6073o3y2rzo.mysql.rds.aliyuncs.com/pharmacyms?serverTimezone=GMT&allowMultiQueries=true&characterEncoding=utf8
     username: root
-    password: root
+    password: DuNai@200204
     driver-class-name: com.mysql.cj.jdbc.Driver
   security:
     user:
       name: user
       password:
+  servlet:
+    multipart:
+      location: F:/WhereIsMyHair/shop/PharmacyMS/src/main/resources/static/img/
 
-#  redis:
-#    host: localhost
-#    port: 6379
-#    jedis:
-#      pool:
-#        max-wait: 30000
-#        max-active: 10
-#        max-idle: 20
-#        min-idle: 0
-#    connect-timeout: 3000
+
+  redis:
+    host: 119.91.192.188
+    port: 6379
+    jedis:
+      pool:
+        max-wait: 30000
+        max-active: 10
+        max-idle: 20
+        min-idle: 0
+    connect-timeout: 3000
+    password: jsu@dunaixdd

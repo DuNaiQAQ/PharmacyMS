@@ -2,59 +2,47 @@ package com.jsu.pharmacyms.dao;
 
 import com.jsu.pharmacyms.domain.DrugOut;
 import com.jsu.pharmacyms.domain.DrugsPurchase;
-import com.jsu.pharmacyms.domain.PurchaseProject;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
 public interface StoreHouseDao {
-    @Insert("insert into sh_purchase(id,drug_id,product_fact_id,produce_time,validity,purchase_num,purchase_value,purchase_value_sum,purchase_date)" +
-            "values(#{id},#{drug_id},#{product_fact_id},#{produce_time},#{validity},#{purchase_num},#{purchase_value},#{purchase_value_sum},#{purchase_date})")
+    @Insert("insert into drug_store(id,drug_id,product_fac_id,produce_time,validity,purchase_num,purchase_value,purchase_value_sum,purchase_time)" +
+            "values(#{id},#{drug_id},#{product_fac_id},#{produce_time},#{validity},#{purchase_num},#{purchase_value},#{purchase_value_sum},#{purchase_time})")
         void purchaseDrug(DrugsPurchase info);
 
-    @Delete("delete * from sh_purchase where id = #{id}")
+    @Delete("delete from drug_store where id = #{id}")
     void del_purchase_info(int id);
 
-    @Update("update sh_purchase set" +
-            "id=#{id},drug_id=#{drug_id},produce_time=#{produce_time},validity=#{validity},product_fact_id=#{product_fact_id}," +
+    @Update("update drug_store set" +
+            "id=#{id},drug_id=#{drug_id},produce_time=#{produce_time},validity=#{validity},product_fac_id=#{product_fac_id}," +
             "purchase_num=#{purchase_num},purchase_value=#{purchase_value},purchase_value_sum=#{purchase_value_sum}," +
-            "purchase_date=#{purchase_date}")
+            "purchase_time=#{purchase_time}")
     void update_purchase_info(DrugsPurchase info);
 
-    @Select("select sh_purchase.* from sh_purchase")
+    @Select("select drug_store.*,drug_info.name as 'drug_name',drug_produce_fac.name as 'product_fac_name' " +
+            "from drug_store,drug_info,drug_produce_fac " +
+            "where drug_store.drug_id = drug_info.id and drug_produce_fac.id = drug_store.product_fac_id")
     List<DrugsPurchase> getPurchaseInfos();
 
-    //TODO 更正SQL语句
     @Select("select sh_out.* from sh_out")
     List<DrugOut> getOutInfo();
 
-    @Insert("insert into sh_out(id,drug_id,batch_id,out_num,value,out_sum)" +
-            "values(#{id},#{drug_id},#{batch_id},#{out_num},#{value},#{out_sum})")
+    @Insert("insert into sh_out(id,drug_id,batch_id,out_num,value,out_sum,out_time)" +
+            "values(#{id},#{drug_id},#{batch_id},#{out_num},#{value},#{out_sum},#{out_time})")
     void addOutInfo(DrugOut info);
 
-    @Delete("delete * from sh_out where id = #{id}")
+    @Delete("delete from sh_out where id = #{id}")
     void del_outinfo(int id);
 
     @Update("update sh_out set " +
-            "id=#{id},drug_id=#{drug_id},batch_id=#{batch_id},out_num=#{out_num},value=#{value},out_sum=#{out_sum}" +
+            "id=#{id},drug_id=#{drug_id},batch_id=#{batch_id},out_num=#{out_num},value=#{value},out_sum=#{out_sum},out_time=#{out_time}" +
             "where id = #{id}")
     void update_out_info(DrugOut info);
 
-
-    @Insert("insert into sh_purchase_project(id,drug_id,purchase_num,is_purchase)" +
-            "values(#{id},#{drug_id},#{purchase_num},#{is_purchase}")
-    void addPorject(PurchaseProject project);
-
-    @Update("update sh_purchase_project" +
-            "set id=#{id},drug_id=#{drug_id},purchase_num={purchase_num},is_purchase=#{is_purchase}" +
-            "where id = #{id}")
-    void updateProject(PurchaseProject project);
-
-    @Delete("delete * from sh_purchase_project where id = #{id}")
-    void deleteProject(int id);
-
-    @Select("select * from sh_purchase_project")
-    List<PurchaseProject> getProjects();
-
+    @Select("select TIMESTAMPDIFF(DAY,#{date2},#{date1})")
+    int getDiff(Timestamp date1, Timestamp date2);
 }
