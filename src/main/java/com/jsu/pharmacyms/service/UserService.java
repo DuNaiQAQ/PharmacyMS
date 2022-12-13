@@ -1,9 +1,6 @@
 package com.jsu.pharmacyms.service;
 
-import com.jsu.pharmacyms.domain.DashBoardInfo;
 import com.jsu.pharmacyms.domain.User;
-
-import java.util.List;
 
 public interface UserService {
     public User getUser(String username);

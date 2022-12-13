@@ -1,13 +1,10 @@
 package com.jsu.pharmacyms.service.Impl;
 
 import com.jsu.pharmacyms.dao.UserDao;
-import com.jsu.pharmacyms.domain.DashBoardInfo;
 import com.jsu.pharmacyms.domain.User;
 import com.jsu.pharmacyms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
